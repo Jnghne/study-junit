@@ -3,7 +3,7 @@ package study.cafekiosk.spring.api.service.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study.cafekiosk.spring.api.controller.request.OrderCreateRequest;
+import study.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import study.cafekiosk.spring.api.service.Order.response.OrderResponse;
 import study.cafekiosk.spring.domain.order.Order;
 import study.cafekiosk.spring.domain.order.OrderRepository;
