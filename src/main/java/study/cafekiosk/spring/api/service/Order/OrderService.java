@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
+import study.cafekiosk.spring.api.service.Order.request.OrderCreateServiceRequest;
 import study.cafekiosk.spring.api.service.Order.response.OrderResponse;
 import study.cafekiosk.spring.domain.order.Order;
 import study.cafekiosk.spring.domain.order.OrderRepository;
@@ -26,7 +27,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final StockRepository stockRepository;
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 

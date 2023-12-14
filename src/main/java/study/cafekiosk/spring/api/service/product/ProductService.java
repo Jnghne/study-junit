@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import study.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import study.cafekiosk.spring.api.service.product.response.ProductResponse;
 import study.cafekiosk.spring.domain.product.Product;
 import study.cafekiosk.spring.domain.product.ProductRepository;
@@ -34,7 +35,7 @@ public class ProductService {
         // => 방안 1) 컬럼에 Unique 전략을 걸고, 동시에 등록하다가 겹쳐서 튕겨나간 경우 3회 이상 재등록 시도 하기
         // => 방안 2) ProductNumber를 UUID로 만들도록 전략을 짜기
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         // DB에서 마지막 저장된 Product의 상품 번호 조회
         String nextProductNumber = createNextProductNumber();
 
