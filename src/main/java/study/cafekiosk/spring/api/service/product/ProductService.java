@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductNumberFactory productNumberFactory;
 
     // 동시성 이슈 존재 : 내가 상품을 등록할 때 다른 사람이 동시에 등록하면 어떻게 할지 ?
         // => 방안 1) 컬럼에 Unique 전략을 걸고, 동시에 등록하다가 겹쳐서 튕겨나간 경우 3회 이상 재등록 시도 하기
@@ -37,7 +38,7 @@ public class ProductService {
     @Transactional
     public ProductResponse createProduct(ProductCreateServiceRequest request) {
         // DB에서 마지막 저장된 Product의 상품 번호 조회
-        String nextProductNumber = createNextProductNumber();
+        String nextProductNumber = productNumberFactory.createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
         Product savedProduct = productRepository.save(product);
@@ -52,16 +53,5 @@ public class ProductService {
         return products.stream()
                 .map(ProductResponse::of)
                 .collect(Collectors.toList());
-    }
-
-    private String createNextProductNumber() {
-        String latestProductNumber = productRepository.findLatestProductNumber();
-        if (latestProductNumber == null) {
-            return "001";
-        }
-        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
-        int nextProductNumberInt = latestProductNumberInt + 1;
-
-        return String.format("%03d", nextProductNumberInt);
     }
 }

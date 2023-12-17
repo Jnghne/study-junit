@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import study.cafekiosk.spring.IntegrationTestSupport;
 import study.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import study.cafekiosk.spring.api.service.product.response.ProductResponse;
 import study.cafekiosk.spring.domain.product.Product;
@@ -22,9 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static study.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static study.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+
+class ProductServiceTest extends IntegrationTestSupport {
     @Autowired
     private ProductService productService;
 
